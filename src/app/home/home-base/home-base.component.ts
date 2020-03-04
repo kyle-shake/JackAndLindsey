@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DeviceService } from '@app/_services/device.service';
+
 @Component({
   selector: 'app-home-base',
   templateUrl: './home-base.component.html',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeBaseComponent implements OnInit {
 
-  constructor() { }
+  isMobile: boolean;
 
-  ngOnInit() {
+  constructor(
+    private _deviceService: DeviceService
+  ){}
+
+  ngOnInit(){
+    this.isMobile = this._deviceService.isMobile
+    if(!this.isMobile){
+      this.isMobile = this._deviceService.getDeviceType()
+    }
   }
+
 
 }

@@ -11,6 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -26,7 +31,12 @@ import { MatTableModule } from '@angular/material/table';
    MatIconModule,
    MatBottomSheetModule,
    MatDialogModule,
-   MatTableModule
+   MatTableModule,
+   MatListModule,
+   MatGridListModule,
+   MatTooltipModule,
+   MatCheckboxModule,
+   MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }

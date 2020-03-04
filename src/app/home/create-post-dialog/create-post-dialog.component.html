@@ -1,0 +1,62 @@
+<h3 mat-dialog-title>Create New Post</h3>
+<mat-grid-list mat-dialog-content cols=1>
+  <mat-grid-tile>
+    <!--ToDo: Add Spacer-->
+    <button type="button" mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="!submitting && !posted">
+
+    <form [formGroup]="createPostForm" (ngSubmit)="submitPost()">
+      <mat-grid-list cols=1>
+
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput formControlName='title'>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input matInput formControlName='author'>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-label>Post Body</mat-label>
+            <textarea matInput formControlName='content'></textarea>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-checkbox formControlName="pinned">Keep Post Pinned</mat-checkbox>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <input type="file" id="imgFileInput" #imgFileInput (change)="onFileChange($event)">
+          <button type="button" mat-button (click)="clearFile()">Clear File</button>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <button type="button" mat-raised-button [disabled]="createPostForm.invalid">Submit Post</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="submitting && !posted">
+    <mat-progress-spinner color="primary" mode="'indeterminate'"></mat-progress-spinner>
+    <h4>Submitting Post...</h4>
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="!submitting && posted">
+    <mat-icon>check_circle_outline</mat-icon>
+    <h4>Post Successfully Submitted</h4>
+    <button type="button" mat-raised-button [mat-dialog-close]="newPost">Close Window</button>
+  </mat-grid-tile>
+</mat-grid-list>

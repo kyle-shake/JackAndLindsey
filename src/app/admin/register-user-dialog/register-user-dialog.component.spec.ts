@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopNavComponent } from './top-nav.component';
+import { RegisterUserDialogComponent } from './register-user-dialog.component';
 
-describe('TopNavComponent', () => {
-  let component: TopNavComponent;
-  let fixture: ComponentFixture<TopNavComponent>;
+describe('RegisterUserDialogComponent', () => {
+  let component: RegisterUserDialogComponent;
+  let fixture: ComponentFixture<RegisterUserDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopNavComponent ]
+      declarations: [ RegisterUserDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopNavComponent);
+    fixture = TestBed.createComponent(RegisterUserDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TopNavComponent } from './top-nav/top-nav.component';
-import { SideNavComponent } from './side-nav/side-nav.component';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
+import { MaterialModule } from './material/material.module';
+import { ConfirmActionDialogComponent } from './confirm-action-dialog/confirm-action-dialog.component';
+import { ShareItemBottomSheetComponent } from './share-item-bottom-sheet/share-item-bottom-sheet.component';
+import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 
 @NgModule({
-  declarations: [TopNavComponent, SideNavComponent, LoadingDialogComponent],
+  declarations: [
+    LoadingDialogComponent,
+    ConfirmActionDialogComponent,
+    ShareItemBottomSheetComponent,
+    ContactDialogComponent,
+    ContactFormComponent
+    ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ]
 })
 export class SharedModule { }

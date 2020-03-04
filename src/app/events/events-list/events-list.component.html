@@ -1,0 +1,52 @@
+<div class="loading" *ngIf="isLoading; else eventsList">
+  <mat-progress-spinner mode="'indeterminate'" color="'primary'"></mat-progress-spinner>
+</div>
+<mat-accordion class="headers-align" #eventsList>
+  <mat-expansion-panel *ngFor="let event of eventsData" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{event.edate | date:'medium' }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{event.title}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!--Expanded Info-->
+    <mat-grid-list cols="2">
+      <!--Google Maps Integration-->
+      <mat-grid-tile>
+
+      </mat-grid-tile>
+
+      <!--Description-->
+      <mat-grid-tile>
+        <p>{{ event.desc }}</p>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-action-row>
+      <!--Edit-->
+      <button type="button" mat-icon-button (click)="editEvent(event)"
+              *ngIf="isAdmin"
+              matTooltip="Edit Event">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <!--Delete-->
+      <button type="button" mat-icon-button (click)="deleteEvent(event.id)"
+              *ngIf="isAdmin"
+              matTooltip="Delete Event">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <!--ToDo: Add Spacer-->
+
+      <!--Share-->
+      <button type="button" mat-icon-button (click)="shareEvent(event)"
+              matTooltip="Share Post">
+        <mat-icon>share</mat-icon>
+      </button>
+      <!--Attend On Facebook-->
+
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

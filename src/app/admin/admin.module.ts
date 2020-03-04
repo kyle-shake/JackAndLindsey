@@ -1,37 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
-
 import { AdminRoutingModule } from './admin-routing.module';
 import { LoginPanelComponent } from './login-panel/login-panel.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { UserOptionsPanelComponent } from './user-options-panel/user-options-panel.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MaterialModule } from '@app/shared/material/material.module';
+import { RegisterUserDialogComponent } from './register-user-dialog/register-user-dialog.component';
 
-const config = new AuthServiceConfig([
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('')
-  }
-]);
 
-export function provideConfig() {
-  return config;
-}
 
 @NgModule({
-  declarations: [LoginPanelComponent, RegisterFormComponent],
+  declarations: [
+    LoginPanelComponent,
+    RegisterFormComponent,
+    UserOptionsPanelComponent,
+    RegisterUserDialogComponent,
+  ],
   imports: [
     CommonModule,
-
-    SocialLoginModule,
-
-    AdminRoutingModule
+    ReactiveFormsModule,
+    FormsModule,
+    AdminRoutingModule,
+    MaterialModule
   ],
-  providers: [
-    {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig
-    }
-  ],
+  providers: [],
+  exports:[
+    LoginPanelComponent
+  ]
 })
 export class AdminModule { }

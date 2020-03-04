@@ -1,0 +1,44 @@
+<div class="loading" *ngIf="isLoading; else recentPostsGrid">
+  <mat-progress-spinner mode="'indeterminate'" color="'primary'"></mat-progress-spinner>
+</div>
+<ng-template #recentPostsGrid>
+  <mat-grid-list cols=1>
+    <mat-grid-tile>
+      <h1>Recent Posts</h1>
+      <!--ToDo: Insert Spacer-->
+      <button mat-icon-button (click)="addPost()" *ngIf="isAdmin"
+              matTooltip="Create New Post">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let post of allPosts">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ post.title }}</mat-card-title>
+          <mat-card-subtitle>Posted by {{ post.author }}</mat-card-subtitle>
+          <!--ToDo: Insert spacer-->
+          <button mat-icon-button (click)="markPostPinned(post.id)" [disabled]="!isAdmin"
+                  matTooltip="Mark Post as Pinned" [matTooltipDisabled]="!isAdmin">
+            <mat-icon></mat-icon><!--ToDo: Make <i class="fas fa-thumbtack"></i> into svg icon-->
+          </button>
+          <button mat-icon-button (click)="deletePost(post.id)" *ngIf="isAdmin"
+                  matTooltip="Delete Post">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-header>
+        <img mat-card-image *ngIf="post.imgPath" [src]="post.imgPath">
+        <mat-card-content>
+          <p>
+            {{ post.content }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button (click)="sharePost(post)"
+                  matTooltip="Share Post">
+            <mat-icon>share</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
