@@ -18,7 +18,8 @@ export class LoginPanelComponent implements OnInit {
   hide = true;
   email = '';
   password = '';
-  private loggedin = false;
+  loggedin = false;
+  firstName = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +29,7 @@ export class LoginPanelComponent implements OnInit {
   ) {
     if(this.AuthService.currentUserValue){
       this.loggedin = true;
+      this.firstName = this.AuthService.currentUserValue.firstName;
     }
 
   }
@@ -42,8 +44,7 @@ export class LoginPanelComponent implements OnInit {
 
 
     event.stopImmediatePropagation()
-    console.log("Email: ", this.email);
-    console.log("Password: ", this.password);
+
     this.loading = true;
     this.AuthService.login(this.email, this.password, '')
         .pipe(first())

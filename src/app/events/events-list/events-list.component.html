@@ -13,17 +13,17 @@
     </mat-expansion-panel-header>
 
     <!--Expanded Info-->
-    <mat-grid-list cols="2">
+    <div class="row">
       <!--Google Maps Integration-->
-      <mat-grid-tile>
+      <div class="col">
 
-      </mat-grid-tile>
+      </div>
 
       <!--Description-->
-      <mat-grid-tile>
+      <div class="col">
         <p>{{ event.desc }}</p>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </div>
+    </div>
 
     <mat-action-row>
       <!--Edit-->
@@ -39,7 +39,7 @@
         <mat-icon>delete</mat-icon>
       </button>
       <!--ToDo: Add Spacer-->
-
+      <span class="spacer"></span>
       <!--Share-->
       <button type="button" mat-icon-button (click)="shareEvent(event)"
               matTooltip="Share Post">

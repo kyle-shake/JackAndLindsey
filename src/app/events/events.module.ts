@@ -12,7 +12,12 @@ import { EventsListComponent } from './events-list/events-list.component';
 
 
 @NgModule({
-  declarations: [EventsBaseComponent, EventsTableComponent, CreateEventDialogComponent, EventsListComponent],
+  declarations: [
+    EventsBaseComponent,
+    EventsTableComponent,
+    CreateEventDialogComponent,
+    EventsListComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,

@@ -11,9 +11,10 @@ export class DeviceService {
 
   getDeviceType() {
     let ua = navigator.userAgent
+    this.isMobile = false;
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua)){
       this.isMobile = true;
-      return this.isMobile
     }
+    return this.isMobile
   }
 }

@@ -1,0 +1,151 @@
+<div class="row" mat-dialog-title>
+  <div class="col-1">
+    <h3>
+      Filter {{isPhoto ? 'Photos' : 'Videos'}}
+    </h3>
+  </div>
+  <div class="col-1">
+    <button type="button" mat-icon-button [mat-dialog-close]="false">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+
+    <!--By Upload Date (udate property)-->
+    <div class="row" [class.filter-active]="currentFilters.udate.enabled">
+      <div class="col">
+        <h5 class="filter-label">Date Uploaded</h5>
+      </div>
+      <div class="col">
+        <div class="row">
+          <label class="col-form-label text-break">
+            Show {{isPhoto ? 'Photos' : 'Videos'}} uploaded between
+          </label>
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Start Date</mat-label>
+              <input type="date" matInput [matDatepicker]="UsDate" [(ngModel)]="currentFilters.udate.sDate">
+              <mat-datepicker-toggle matSuffix [for]="UsDate"></mat-datepicker-toggle>
+              <mat-datepicker #UsDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <label class="col-form-label">and</label>
+          <div class="col">
+            <mat-form-field>
+              <mat-label>End Date</mat-label>
+              <input type="date" matInput [matDatepicker]="UeDate" [(ngModel)]="currentFilters.udate.eDate">
+              <mat-datepicker-toggle matSuffix [for]="UeDate"></mat-datepicker-toggle>
+              <mat-datepicker #UeDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--By Taken/Recorded Date (tdate property)-->
+    <div class="row" [class.filter-active]="currentFilters.tdate.enabled">
+      <div class="col">
+        <h5 class="filter-label text-break">Date {{isPhoto ? 'Taken' : 'Recorded'}}</h5>
+      </div>
+      <div class="col">
+        <div class="row">
+          <label class="col-form-label text-break">
+            Show {{isPhoto ? 'Photos' : 'Videos'}} {{isPhoto ? 'taken' : 'recorded'}} between
+          </label>
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Start Date</mat-label>
+              <input type="date" matInput [matDatepicker]="TsDate" [(ngModel)]="currentFilters.tdate.sDate">
+              <mat-datepicker-toggle matSuffix [for]="TsDate"></mat-datepicker-toggle>
+              <mat-datepicker #TsDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <label class="col-form-label">and</label>
+          <div class="col">
+            <mat-form-field>
+              <mat-label>End Date</mat-label>
+              <input type="date" matInput [matDatepicker]="TeDate" [(ngModel)]="currentFilters.tdate.eDate">
+              <mat-datepicker-toggle matSuffix [for]="TeDate"></mat-datepicker-toggle>
+              <mat-datepicker #TeDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- By Location (physloc property)-->
+    <div class="row"  [class.filter-active]="currentFilters.physloc.enabled">
+      <div class="col">
+        <h5 class="filter-label">Location</h5>
+      </div>
+      <div class="col">
+        <mat-selection-list #locSelList (selectionChange)="filterMediaByLocation($event, locSelList)">
+          <mat-list-option *ngFor="let loc of locations">
+            {{loc}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </div>
+
+    <!-- By Description (desc property)-->
+    <div class="row" [class.filter-active]="currentFilters.desc.enabled">
+      <div class="col">
+        <h5 class="filter-label">Description</h5>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Search Term in Description</mat-label>
+          <input matInput [(ngModel)]="currentFilters.desc.filVal" (change)="filterMedia('desc')">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- By Category (categories property)-->
+    <div class="row" [class.filter-active]="currentFilters.categories.enabled">
+      <div class="col">
+        <h5 class="filter-label">Category</h5>
+      </div>
+      <div class="col">
+        <mat-selection-list #catSelList (selectionChange)="filterMediaByLocation($event, catSelList)">
+          <mat-list-option *ngFor="let cat of categories">
+            {{cat}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </div>
+
+
+    <!-- By if there is a youtube link *Videos only* (ytlink property)-->
+    <div class="row" *ngIf="!isPhoto" [class.filter-active]="currentFilters.ytlink.enabled">
+      <div class="col-1">
+        <h5 class="filter-label">YouTube</h5>
+      </div>
+      <div class="col">
+        <span class="w-100 text-center">
+          <mat-checkbox [(ngModel)]="currentFilters.ytlink.enabled">Enable</mat-checkbox>
+        </span>
+        <span class="w-100 text-center">
+          <mat-slide-toggle [disabled]="!currentFilters.ytlink.enabled" [(ngModel)]="currentFilters.ytlink.withLink">
+            Show Only Videos with YouTube Link
+          </mat-slide-toggle>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <button type="button" mat-raised-button (click)="filterMedia()">
+      Filter {{isPhoto ? 'Photos' : 'Videos'}}
+    </button>
+    <button type="button" mat-flat-button [mat-dialog-close]="false">
+      Cancel
+    </button>
+  </div>
+</div>

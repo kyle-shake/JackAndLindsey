@@ -1,5 +1,5 @@
-<button mat-button [matMenuTriggerFor]="loginFormPanel" aria-label="Login Button">
-  Login
+<button mat-button [matMenuTriggerFor]="loggedin ? userProfileMenu : loginFormPanel" aria-label="Login Button">
+  {{loggedin ? firstName : 'Login'}}
   <mat-icon>account_circle</mat-icon>
 </button>
 <mat-menu #loginFormPanel="matMenu"  yPosition="below">
@@ -28,8 +28,11 @@
     <div mat-menu-item [disableRipple]="true" >
 
       <button type="button" mat-raised-button (click)="logUserIn($event)">Login</button>
-      <!--Facebook Login/Register-->
+      <!--ToDo: Facebook Login/Register-->
 
     </div>
 
+</mat-menu>
+<mat-menu #userProfileMenu="matMenu" yPosition="below">
+  <!--ToDo: User Profile Menu-->
 </mat-menu>

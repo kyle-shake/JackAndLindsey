@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddVideoFormComponent } from './add-video-form.component';
+import { MediaViewerDialogComponent } from './media-viewer-dialog.component';
 
-describe('AddVideoFormComponent', () => {
-  let component: AddVideoFormComponent;
-  let fixture: ComponentFixture<AddVideoFormComponent>;
+describe('MediaViewerDialogComponent', () => {
+  let component: MediaViewerDialogComponent;
+  let fixture: ComponentFixture<MediaViewerDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddVideoFormComponent ]
+      declarations: [ MediaViewerDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddVideoFormComponent);
+    fixture = TestBed.createComponent(MediaViewerDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

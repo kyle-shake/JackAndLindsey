@@ -1,62 +1,69 @@
 <h3 mat-dialog-title>Create New Post</h3>
-<mat-grid-list mat-dialog-content cols=1>
-  <mat-grid-tile>
-    <!--ToDo: Add Spacer-->
+<div class="row" mat-dialog-content>
+  <div class="col text-left">
     <button type="button" mat-icon-button (click)="closeDialog()">
       <mat-icon>close</mat-icon>
     </button>
-  </mat-grid-tile>
-  <mat-grid-tile *ngIf="!submitting && !posted">
+  </div>
 
-    <form [formGroup]="createPostForm" (ngSubmit)="submitPost()">
-      <mat-grid-list cols=1>
+  <div class="row" *ngIf="!submitting && !posted">
+    <div class="col">
+      <form [formGroup]="createPostForm" (ngSubmit)="submitPost()">
+        <div class="form-row row-col-1">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Title</mat-label>
+              <input matInput formControlName='title'>
+            </mat-form-field>
+          </div>
 
-        <mat-grid-tile>
-          <mat-form-field>
-            <mat-label>Title</mat-label>
-            <input matInput formControlName='title'>
-          </mat-form-field>
-        </mat-grid-tile>
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Author</mat-label>
+              <input matInput formControlName='author'>
+            </mat-form-field>
+          </div>
 
-        <mat-grid-tile>
-          <mat-form-field>
-            <mat-label>Author</mat-label>
-            <input matInput formControlName='author'>
-          </mat-form-field>
-        </mat-grid-tile>
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Post Body</mat-label>
+              <textarea matInput formControlName='content'></textarea>
+            </mat-form-field>
+          </div>
 
-        <mat-grid-tile>
-          <mat-form-field>
-            <mat-label>Post Body</mat-label>
-            <textarea matInput formControlName='content'></textarea>
-          </mat-form-field>
-        </mat-grid-tile>
+          <div class="col">
+            <mat-checkbox formControlName="pinned">Keep Post Pinned</mat-checkbox>
+          </div>
 
-        <mat-grid-tile>
-          <mat-checkbox formControlName="pinned">Keep Post Pinned</mat-checkbox>
-        </mat-grid-tile>
+          <div class="col">
+            <input type="file" id="imgFileInput" #imgFileInput (change)="onFileChange($event)">
+            <button type="button" mat-button (click)="clearFile()">Clear File</button>
+          </div>
 
-        <mat-grid-tile>
-          <input type="file" id="imgFileInput" #imgFileInput (change)="onFileChange($event)">
-          <button type="button" mat-button (click)="clearFile()">Clear File</button>
-        </mat-grid-tile>
+          <div class="col">
+            <button type="button" mat-raised-button [disabled]="createPostForm.invalid">Submit Post</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
-        <mat-grid-tile>
-          <button type="button" mat-raised-button [disabled]="createPostForm.invalid">Submit Post</button>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
 
-  </mat-grid-tile>
+  <div class="row" *ngIf="submitting && !posted">
+    <div class="col text-center">
+      <mat-progress-spinner color="primary" mode="'indeterminate'"></mat-progress-spinner>
+      <h4>Submitting Post...</h4>
+    </div>
+  </div>
 
-  <mat-grid-tile *ngIf="submitting && !posted">
-    <mat-progress-spinner color="primary" mode="'indeterminate'"></mat-progress-spinner>
-    <h4>Submitting Post...</h4>
-  </mat-grid-tile>
+  <div class="row" *ngIf="!submitting && posted">
+    <div class="col">
+      <mat-icon>check_circle_outline</mat-icon>
+      <h4>Post Successfully Submitted</h4>
+      <button type="button" mat-raised-button [mat-dialog-close]="newPost">
+        Close Window
+      </button>
+    </div>
 
-  <mat-grid-tile *ngIf="!submitting && posted">
-    <mat-icon>check_circle_outline</mat-icon>
-    <h4>Post Successfully Submitted</h4>
-    <button type="button" mat-raised-button [mat-dialog-close]="newPost">Close Window</button>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>

@@ -13,10 +13,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   exports: [
@@ -36,7 +41,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
    MatGridListModule,
    MatTooltipModule,
    MatCheckboxModule,
-   MatProgressSpinnerModule
+   MatProgressSpinnerModule,
+   MatRadioModule,
+   MatButtonToggleModule,
+   MatTabsModule,
+   MatDatepickerModule,
+   MatSlideToggleModule,
+   MatMomentDateModule
   ]
 })
 export class MaterialModule { }

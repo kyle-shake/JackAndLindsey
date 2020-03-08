@@ -2,16 +2,25 @@
   <mat-progress-spinner mode="'indeterminate'" color="'primary'"></mat-progress-spinner>
 </div>
 <ng-template #recentPostsGrid>
-  <mat-grid-list cols=1>
-    <mat-grid-tile>
+  <div class="row row-cols-1">
+    <div class="col">
+      <span class="spacer"></span>
       <h1>Recent Posts</h1>
-      <!--ToDo: Insert Spacer-->
+      <span class="spacer"></span>
       <button mat-icon-button (click)="addPost()" *ngIf="isAdmin"
               matTooltip="Create New Post">
         <mat-icon>add</mat-icon>
       </button>
-    </mat-grid-tile>
-    <mat-grid-tile *ngFor="let post of allPosts">
+    </div>
+    <div class="col" *ngIf="allPosts.length === 0">
+      <mat-card>
+        <mat-card-content>
+          <p *ngIf="isAdmin"> No recent posts! Add a post by clicking the <mat-icon>add</mat-icon> icon above!</p>
+          <p *ngIf="!isAdmin">No recent posts. Check back later for news from JacknLindsey</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col" *ngFor="let post of allPosts">
       <mat-card>
         <mat-card-header>
           <mat-card-title>{{ post.title }}</mat-card-title>
@@ -39,6 +48,6 @@
           </button>
         </mat-card-actions>
       </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>
 </ng-template>

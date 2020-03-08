@@ -6,6 +6,7 @@ import { ConfirmActionDialogComponent } from './confirm-action-dialog/confirm-ac
 import { ShareItemBottomSheetComponent } from './share-item-bottom-sheet/share-item-bottom-sheet.component';
 import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -19,6 +20,12 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     ],
   imports: [
     CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  exports:[
+    ContactFormComponent,
     MaterialModule
   ]
 })

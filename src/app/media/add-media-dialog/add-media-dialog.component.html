@@ -1,0 +1,95 @@
+<h3 mat-dialog-title>
+  {{ isAdd ? 'Add New ' : 'Edit '}}{{ isPhoto ? 'Photo' : 'Video' }}
+</h3>
+<div class="row row-col-1" mat-dialog-content>
+  <div class="col text-left">
+    <button type="button" mat-icon-button [mat-dialog-close]="mediaAdded ? mediaAdded : false">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="col">
+    <div class="row row-col-1" *ngIf="!isSubmitting && !isSubmitted">
+
+      <div class="col" *ngIf="!isAdd">
+        <img *ngIf="isPhoto" [src]="MedToEdit.path">
+        <video *ngIf="!isPhoto" width="300" height="300" preload="metadata">
+          <source [src]="MedToEdit.path" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="col">
+        <form [formGroup]="addEditMediaForm" (ngSubmit)="submitMedia()">
+          <div class="form-row row-col-1">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>When was this taken?</mat-label>
+                <input matInput formControlName='tdate'>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Where was this taken?</mat-label>
+                <input matInput formControlName='physloc'>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName='desc'></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="col" *ngIf="!isPhoto">
+              <mat-form-field>
+                <mat-label>YouTube Link</mat-label>
+                <input matInput formControlName='ytlink'>
+              </mat-form-field>
+            </div>
+
+            <div class="col" *ngIf="isAdd">
+              <input type="file" id="imgFileInput" #imgFileInput (change)="onFileChange($event)">
+              <button type="button" mat-button (click)="clearFile()">Clear File</button>
+            </div>
+
+            <div class="col">
+              <button type="button" mat-raised-button [disabled]="addEditMediaForm.invalid">
+                {{isAdd ? 'Upload ' : 'Update '}} {{isPhoto ? 'Photo' : 'Video'}}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="row row-col-1 justify-content-center" *ngIf="isSubmitting && !isSubmitted">
+      <div class="col-1 text-center">
+        <mat-progress-spinner color="primary" mode="'indeterminate'">
+        </mat-progress-spinner>
+      </div>
+      <div class="col-1 text-center">
+        <h4 *ngIf="isAdd">Submitting {{ isPhoto ? 'Photo' : 'Video'}} Upload...</h4>
+        <h4 *ngIf="!isAdd">Submitting {{ isPhoto ? 'Photo' : 'Video'}} Update...</h4>
+      </div>
+    </div>
+
+    <div class="row row-col-1 justify-content-center" *ngIf="!isSubmitting && isSubmitted">
+      <div class="col text-center">
+        <mat-icon>check_circle_outline</mat-icon>
+      </div>
+      <div class="col text-center">
+        <h4>{{ isPhoto ? 'Photo' : 'Video'}} Successfully {{isAdd ? 'Uploaded' : 'Updated'}}</h4>
+      </div>
+      <div class="col text-center">
+        <button type="button" mat-raised-button (click)="clearForm()" *ngIf="isAdd">
+          Upload Another {{ isPhoto ? 'Photo' : 'Video'}}
+        </button>
+        <button type="button" mat-raised-button [mat-dialog-close]="mediaAdded">
+          Close Window
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

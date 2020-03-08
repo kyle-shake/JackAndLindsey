@@ -1,1 +1,19 @@
-<p>media-base works!</p>
+<div class="row row-col-1">
+  <div class="col">
+    <nav mat-tab-nav-bar mat-stretch-tabs class="mat-elevation-z2">
+      <a mat-tab-link [routerLink]="['./photos']" routerLinkActive
+         #Prla="routerLinkActive" [active]="Prla.isActive">
+        <mat-icon>camera_alt</mat-icon>
+        <h4>Photos</h4>
+      </a>
+      <a mat-tab-link [routerLink]="['./videos']" routerLinkActive
+         #Vrla="routerLinkActive" [active]="Vrla.isActive">
+        <mat-icon>videocam</mat-icon>
+        <h4>Videos</h4>
+      </a>
+    </nav>
+  </div>
+  <div class="col">
+
+  </div>
+</div>

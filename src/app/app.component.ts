@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnChanges } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { JnlUser } from './_models/jnl-user';
 import { Router, RouterOutlet } from '@angular/router';
@@ -12,7 +12,7 @@ import { DeviceService } from './_services/device.service';
   styleUrls: ['./app.component.sass'],
   animations: []
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnChanges{
   title = 'JacknLindsey';
 
   currentUser: JnlUser;
@@ -32,6 +32,11 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this.isMobile = this._deviceService.getDeviceType();
+    console.log(this.router.url);
+  }
+
+  ngOnChanges(){
+    console.log(this.router.url);
   }
 
   get isAdmin(){

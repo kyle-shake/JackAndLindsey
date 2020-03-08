@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhotosPageComponent } from './photos-page.component';
+import { MediaGridComponent } from './media-grid.component';
 
-describe('PhotosPageComponent', () => {
-  let component: PhotosPageComponent;
-  let fixture: ComponentFixture<PhotosPageComponent>;
+describe('MediaGridComponent', () => {
+  let component: MediaGridComponent;
+  let fixture: ComponentFixture<MediaGridComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhotosPageComponent ]
+      declarations: [ MediaGridComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhotosPageComponent);
+    fixture = TestBed.createComponent(MediaGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,131 @@
+<div class="row" *ngIf="isLoading">
+  <div class="col">
+    <mat-spinner mode="indeterminate" color="accent"></mat-spinner>
+  </div>
+</div>
+<div class="row row-cols-1" *ngIf="!isLoading">
+  <div class="col">
+    <div class="row">
+      <!--Edit, Add--> <!--ENH: clicking edit button slides open edit toolbar -->
+      <div class="col text-left">
+        <div *ngIf="isAdmin">
+          <button type="button" mat-icon-button (click)="inEditMode = !inEditMode"
+                  matTooltip="{{ isDataToView ? 'Enter Edit Mode' : 'Nothing to Edit'}}"
+                  [disabled]="!isDataToView">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button type="button" class="mat-elevation-z2" mat-icon-button
+                  matTooltip="Add {{mediaType}}" (click)="openAddMediaDialog()">
+              <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="col">
+        <h2>{{onPhotos ? 'Photos' : 'Videos'}}</h2>
+      </div>
+
+      <!--Resize, Sort, Filter Buttons-->
+      <div class="col text-right">
+
+        <!--Resize-->
+        <button type="button" class="mat-elevation-z2" mat-icon-button
+                matTooltip="Resize" [matMenuTriggerFor]="resizeMenu">
+          <mat-icon>view_comfy</mat-icon>
+        </button>
+
+        <mat-menu #resizeMenu="matMenu">
+          <div mat-menu-item (click)="$event.stopPropagation()">
+            <mat-button-toggle-group ([ngModel])="numItemsPerRow">
+              <mat-button-toggle value="8">
+                <mat-icon>laptop</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="6">
+                <mat-icon>tablet</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="4">
+                <mat-icon>smartphone</mat-icon>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </mat-menu>
+
+        <!--Sort-->
+        <button type="button" class="mat-elevation-z2" mat-icon-button
+                matTooltip="Sort {{onPhotos ? 'Photos' : 'Videos'}}" [matMenuTriggerFor]="sortMenu">
+          <mat-icon>sort</mat-icon>
+        </button>
+        <mat-menu #sortMenu="matMenu">
+          <div mat-menu-item [disableRipple]="true" (click)="$event.stopPropagation()">
+            <button (click)="CurrentMedia.sort(sortByDate)">
+              <mat-icon></mat-icon>
+              Date
+            </button>
+          </div>
+          <div mat-menu-item [disableRipple]="true" (click)="$event.stopPropagation()">
+            <button (click)="CurrentMedia.sort(sortByLocation)">
+              <mat-icon></mat-icon>
+              Location
+            </button>
+          </div>
+          <div mat-menu-item [disableRipple]="true" (click)="$event.stopPropagation()">
+            <button mat-menu-item (click)="CurrentMedia.sort(sortByCategory)">
+              <mat-icon></mat-icon>
+              Category
+            </button>
+          </div>
+        </mat-menu>
+
+        <!--Filter-->
+        <button type="button" class="mat-elevation-z2" mat-icon-button
+                matTooltip="Filter" (click)="openFilterMediaDialog()">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <!-- Current Filters -->
+    <div class="row">
+
+    </div>
+
+    <!-- Media Content Grid -->
+    <mat-grid-list [cols]="numItemsPerRow" rowHeight="fit"
+                  *ngIf="isDataToView; else NoMediaMessage">
+      <mat-grid-tile *ngFor="let item of CurrentMedia; let i=index">
+        <div class="MediaOverlay">
+          <div class="editMediaOverlay" *ngIf="inEditMode" (click)="openEditMediaDialog(item, i)">
+            <mat-icon class="overlay-icon">edit</mat-icon>
+          </div>
+          <div class="deleteMediaOverlay" *ngIf="inEditMode" (click)="openConfirmDeleteDialog(item, i)">
+            <mat-icon class="overlay-icon">delete</mat-icon>
+          </div>
+          <div class="viewMediaOverlay" *ngIf="!inEditMode" (click)="showItemInViewer(item, i)">
+            <mat-icon class="overlay-icon">zoom_in</mat-icon>
+          </div>
+
+          <img [src]="item.path" *ngIf="onPhotos" class="grid-img">
+          <video *ngIf="!onPhotos" preload="metadata" width="auto" height="auto">
+            <source [src]="item.path + '#t=0.5'" type="video/mp4">
+          </video>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <!-- No Media Message -->
+    <div class="row" #NoMediaMessage>
+      <h4 class="w-100 text-center"> No {{ mediaType }} uploaded yet </h4>
+      <div class="col text-center">
+        <button type="button" mat-raised-button (click)="openAddMediaDialog()">
+          Upload {{onPhotos ? 'Photos' : 'Videos'}}
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>

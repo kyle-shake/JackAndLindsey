@@ -1,1 +1,89 @@
-<p>contact-form works!</p>
+<form [formGroup]="contactForm" (ngSubmit)="submitContactForm()">
+  <div class="form-row">
+    <div class="col">
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required>
+        <mat-error *ngIf="contactForm['firstName'].invalid">
+          You must enter a value
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required>
+        <mat-error *ngIf="contactForm['lastName'].invalid">
+          You must enter a value
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <mat-form-field>
+        <mat-label>Business</mat-label>
+        <input matInput formControlName="business">
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="contactForm['email'].invalid">{{ getEmailErrorMessage() }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field>
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNo" required>
+        <mat-error *ngIf="contactForm['phoneNo'].invalid">
+          You must enter a value
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="pCmethod" class="col-sm-2">Preferred Method of Contact:</label>
+    <div class="col-sm-10">
+      <mat-button-toggle-group formControlName="preferredMethod">
+        <mat-button-toggle value="email" aria-label="I prefer an email">
+          Contact me via Email
+        </mat-button-toggle>
+        <mat-button-toggle value="phone" aria-label="I prefer a phone call">
+          Contact me via Phone
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="form-row">
+    <label id="timeOfDayRadioLabel">What time would you like us to call/email you?</label>
+    <mat-radio-group aria-labelledby="timeOfDayRadioLabel" formControlName="timeOfDay">
+      <mat-radio-button value="morning">
+        Morning
+        <mat-icon matTooltip="Between 9am and noon">help</mat-icon>
+      </mat-radio-button>
+      <mat-radio-button value="afternoon">
+        Afternoon
+        <mat-icon matTooltip="Between noon and 4pm">help</mat-icon>
+      </mat-radio-button>
+      <mat-radio-button value="evening">
+        Evening
+        <mat-icon matTooltip="Between 4pm and 8pm">help</mat-icon>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-1 text-right">
+      <button type="submit" mat-raised-button [disabled]="contactForm.invalid">Contact Me!</button>
+    </div>
+  </div>
+</form>
